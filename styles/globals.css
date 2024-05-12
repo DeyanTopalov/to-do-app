@@ -15,6 +15,51 @@
 
 /* CSS Variables based on project design */
 
+
+
+
+.test {
+  color: hsl(220, 98%, 61%);
+}
+
+.test-primary {
+  /* - Bright Blue:  */
+  color: hsl(220, 98%, 61%);
+  /* - Check Background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%) */
+  background-image: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+}
+
+.test-light {
+  /* - Very Light Gray:  */
+  color: hsl(0, 0%, 98%);
+  /* - Very Light Grayish Blue:  */
+  color: hsl(236, 33%, 92%);
+  /* - Light Grayish Blue:  (text completed) */
+  color: hsl(233, 11%, 84%);
+  /* - Dark Grayish Blue: (text input) (card footer) (filter) */
+  color: hsl(236, 9%, 61%);
+  /* - Very Dark Grayish Blue:  (text todo item) */
+  color: hsl(235, 19%, 35%);
+}
+
+.test-dark {
+  /* - Very Dark Blue:  */
+  color: hsl(235, 21%, 11%);
+  /* - Very Dark Desaturated Blue:  */
+  color: hsl(235, 24%, 19%);
+  /* - Light Grayish Blue: (text todo item) */
+  color: hsl(234, 39%, 85%);
+  /* - Light Grayish Blue (hover):  */
+  color: hsl(236, 33%, 92%);
+  /* - Dark Grayish Blue: (text input) (card footer) (filter) */
+  color: hsl(234, 11%, 52%);
+  /* - Very Dark Grayish Blue:  (text completed) */
+  color: hsl(233, 14%, 35%);
+  /* - Very Dark Grayish Blue:  */
+  color: hsl(237, 14%, 26%);
+}
+
+/* Shadcn/ui styles */
 @layer base {
   :root {
     --background: 0 0% 100%;
