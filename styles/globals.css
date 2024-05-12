@@ -14,12 +14,42 @@
 
 
 /* CSS Variables based on project design */
+@layer base {
+  :root {
+    /* Primary Clrs */
+    --focus-blue: 220, 98%, 61%;
+    --linear-start: 192, 100%, 67%;
+    --linear-end: 280, 87%, 65%;
 
+    /* Secondary Clrs Light Theme*/
+    --app-bg: 236, 33%, 92%;
+    --card-bg: 0, 0%, 98%;
+
+    --todo-text: 235, 19%, 35%;
+    --todo-borders: 233, 11%, 84%;
+    --todo-placeholder: 236, 9%, 61%;
+    --todo-completed: 233, 11%, 84%;
+    --todo-footer: 236, 9%, 61%;
+  }
+
+  .dark {
+    /* Secondary Clrs Dark Theme*/
+    --app-bg: 235, 21%, 11%;
+    --card-bg: 237, 14%, 26%;
+
+    --todo-text: 234, 39%, 85%;
+    --todo-borders: 234, 11%, 52%;
+    --todo-placeholder: 234, 11%, 52%;
+    --todo-completed: 233, 14%, 35%;
+    --todo-footer: 234, 11%, 52%;
+  }
+}
 
 
 
 .test {
-  color: hsl(220, 98%, 61%);
+  color: hsl(237, 14%, 26%);
+  color: hsl(234, 11%, 52%);
 }
 
 .test-primary {
@@ -30,20 +60,20 @@
 }
 
 .test-light {
-  /* - Very Light Gray:  */
+  /* - Very Light Gray: (background-card)*/
   color: hsl(0, 0%, 98%);
-  /* - Very Light Grayish Blue:  */
+  /* - Very Light Grayish Blue: (app-background)  */
   color: hsl(236, 33%, 92%);
-  /* - Light Grayish Blue:  (text completed) */
+  /* - Light Grayish Blue:  (text completed) (checkbox border) (line separator) */
   color: hsl(233, 11%, 84%);
   /* - Dark Grayish Blue: (text input) (card footer) (filter) */
   color: hsl(236, 9%, 61%);
-  /* - Very Dark Grayish Blue:  (text todo item) */
+  /* - Very Dark Grayish Blue:  (text todo item) (delete X) */
   color: hsl(235, 19%, 35%);
 }
 
 .test-dark {
-  /* - Very Dark Blue:  */
+  /* - Very Dark Blue:  (app-background) */
   color: hsl(235, 21%, 11%);
   /* - Very Dark Desaturated Blue:  */
   color: hsl(235, 24%, 19%);
@@ -53,9 +83,9 @@
   color: hsl(236, 33%, 92%);
   /* - Dark Grayish Blue: (text input) (card footer) (filter) */
   color: hsl(234, 11%, 52%);
-  /* - Very Dark Grayish Blue:  (text completed) */
-  color: hsl(233, 14%, 35%);
-  /* - Very Dark Grayish Blue:  */
+  /* - Very Dark Grayish Blue:  (text completed) (checkbox border) (line separator) (delete X)*/
+  color: #4d5066;
+  /* - Very Dark Grayish Blue:  (background-card)*/
   color: hsl(237, 14%, 26%);
 }
 

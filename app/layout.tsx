@@ -15,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${josefinSans.className} grid h-svh w-svw place-content-center gap-0 bg-clr-gray-900 text-left text-lg text-clr-gray-200 antialiased md:h-screen md:w-full`}
+        className={`${josefinSans.className} bg-clr-app-bg    grid h-svh w-svw place-items-center gap-0 text-left text-lg antialiased md:h-screen md:w-full`}
       >
-        <main className="grid h-svh w-svw place-items-center px-4 md:max-w-[90rem]">
+        <main className="grid h-svh w-svw  px-6 md:max-w-[90rem]">
           {children}
         </main>
       </body>

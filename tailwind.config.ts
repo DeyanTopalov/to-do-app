@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -19,6 +19,17 @@ const config = {
     },
     extend: {
       colors: {
+        "clr-focus-blue": "hsla(var(--focus-blue))",
+        "clr-linear-start": "hsla(var(--linear-start))",
+        "clr-linear-end": "hsla(var(--linear-end))",
+        "clr-app-bg": "hsla(var(--app-bg))",
+        "clr-card-bg": "hsla(var(--card-bg))",
+        "clr-todo-text": "hsla(var(--todo-text))",
+        "clr-todo-borders": "hsla(var(--todo-borders))",
+        "clr-todo-placeholder": "hsla(var(--todo-placeholder))",
+        "clr-completed": "hsla(var(--completed))",
+        "clr-footer": "hsla(var(--footer))",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -75,6 +86,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
