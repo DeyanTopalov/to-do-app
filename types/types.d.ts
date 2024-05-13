@@ -14,6 +14,6 @@ interface ToDo {
 
 interface TodoItemProps {
   todo: ToDo;
-  onToggleComplete: (id: number) => void;
-  onDelete: (id: number) => void;
+  onToggleComplete?: (id: number) => void;
+  onDelete?: (id: number) => void;
 }
