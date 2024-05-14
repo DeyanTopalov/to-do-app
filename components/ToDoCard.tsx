@@ -38,6 +38,8 @@ const ToDoCard = () => {
     setNewTodo(e.target.value);
   };
 
+  // basic funct works, add localstorage
+
   return (
     <div className="relative w-full max-w-[33.75rem]">
       <div className=" mt-10 w-full ">
@@ -60,7 +62,7 @@ const ToDoCard = () => {
         <div className="todo-container max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain">
           {todos.map((todo) => (
             <ToDoItem
-              className="border-clr-todo-borders flex snap-start items-center justify-between gap-3 border-b  px-5 py-4 "
+              className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
               key={todo.id}
               todo={todo}
               completed={todo.completed}
@@ -70,7 +72,7 @@ const ToDoCard = () => {
           ))}
         </div>
 
-        <div className="footer-mobile border-clr-todo-borders flex items-center justify-between border-t-0 px-5 py-4 ">
+        <div className="footer-mobile flex items-center justify-between border-t-0 border-clr-todo-borders px-5 py-4 ">
           <p>5 items left</p>
           <div className="hidden items-center gap-3 md:flex">
             <p>All</p>
