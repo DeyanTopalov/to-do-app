@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ToDoCard from "@components/ToDoCard";
 import LocalStorageDemo from "@components/LocalStorageTest";
 export default function Home() {
