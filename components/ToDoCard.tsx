@@ -38,7 +38,7 @@ const ToDoCard = () => {
     setNewTodo(e.target.value);
   };
 
-  // basic funct works, add localstorage
+  // basic funct works, add localstorage.
 
   return (
     <div className="relative w-full max-w-[33.75rem]">
