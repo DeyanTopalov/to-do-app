@@ -3,7 +3,6 @@ import ToDoForm from "./ToDoForm";
 import ToDoItem from "./ToDoItem";
 import { useState } from "react";
 import { useLocalStorage, useIsClient } from "@lib/hooks";
-import { clear } from "console";
 
 const ToDoCard = () => {
   const isClient = useIsClient();
@@ -12,6 +11,7 @@ const ToDoCard = () => {
     undefined,
   );
   const [newToDo, setNewTodo] = useState<string>("");
+  const [filter, setFilter] = useState<string>("all"); // State to manage filter (all, active, completed)
 
   const handleToggleComplete = (id: number) => {
     if (todos) {
@@ -51,15 +51,27 @@ const ToDoCard = () => {
     setTodos(activeTodos ?? []);
   };
 
-  const clearAllTodos = () => {
-    removeTodos();
-  };
+  //! Not in use, but this is how to implement a clear all button
+  //   const clearAllTodos = () => {
+  //     removeTodos();
+  //   };
 
-  const incompleteTodos = todos?.filter((todo) => !todo.completed).length ?? 0;
+  const filteredTodos = todos?.filter((todo) => {
+    if (filter === "active") {
+      return !todo.completed;
+    } else if (filter === "completed") {
+      return todo.completed;
+    }
+    return true; // "all" filter, return all todos
+  });
 
-  const incompleteText = incompleteTodos === 1 ? "item left" : "items left";
+  const countIncompleteTodos =
+    todos?.filter((todo) => !todo.completed).length ?? 0;
 
-  const incompleteTodoText = `${incompleteTodos} ${incompleteText}`;
+  const incompleteText =
+    countIncompleteTodos === 1 ? "item left" : "items left";
+
+  const incompleteTodoText = `${countIncompleteTodos} ${incompleteText}`;
 
   return (
     <div className="relative w-full max-w-[33.75rem]">
@@ -82,7 +94,7 @@ const ToDoCard = () => {
       >
         <div className="todo-container max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain">
           {(isClient &&
-            todos?.map((todo) => (
+            filteredTodos?.map((todo) => (
               <ToDoItem
                 className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
                 key={todo.id}
@@ -99,9 +111,27 @@ const ToDoCard = () => {
           {isClient ? <p>{incompleteTodoText}</p> : <p>Loading...</p>}
 
           <div className="hidden items-center gap-3 md:flex">
-            <p>All</p>
-            <p>Active</p>
-            <p>Completed</p>
+            <button
+              aria-label="Show All"
+              type="button"
+              onClick={() => setFilter("all")}
+            >
+              All
+            </button>
+            <button
+              aria-label="Show Active"
+              type="button"
+              onClick={() => setFilter("active")}
+            >
+              Active
+            </button>
+            <button
+              aria-label="Show Completed"
+              type="button"
+              onClick={() => setFilter("completed")}
+            >
+              Completed
+            </button>
           </div>
           <button
             aria-label="Clear Completed"
