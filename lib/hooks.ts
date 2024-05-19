@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 type StoredValue<T> = T | undefined;
 
 // Define the hook
-function useLocalStorage<T>(
+export function useLocalStorage<T>(
   key: string,
   initialValue?: T,
 ): [StoredValue<T>, (value: T) => void, () => void] {
@@ -64,8 +64,6 @@ function useLocalStorage<T>(
   return [storedValue, setValue, removeValue];
 }
 
-export default useLocalStorage;
-
 //! Usage example:
 // import useLocalStorage from "@lib/hooks";
 
@@ -92,6 +90,18 @@ export default useLocalStorage;
 //     </div>
 //   );
 // };
+
+export function useIsClient(): boolean {
+  // State to manage the client status. Initial is false
+  const [isClient, setIsClient] = useState<boolean>(false);
+
+  // on mount(render on client side), set the client status to true
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+}
 
 // export default LocalStorageDemo;
 

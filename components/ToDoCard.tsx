@@ -1,10 +1,11 @@
 "use client";
 import ToDoForm from "./ToDoForm";
 import ToDoItem from "./ToDoItem";
-import { useState } from "react";
-import useLocalStorage from "@lib/hooks";
+import { useState, useEffect } from "react";
+import { useLocalStorage, useIsClient } from "@lib/hooks";
 
 const ToDoCard = () => {
+  const isClient = useIsClient();
   const [todos, setTodos, removeTodos] = useLocalStorage<ToDo[] | undefined>(
     "todos",
     undefined,
@@ -78,20 +79,23 @@ const ToDoCard = () => {
        mb-4  overflow-x-hidden rounded-lg bg-white shadow-md"
       >
         <div className="todo-container max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain">
-          {todos?.map((todo) => (
-            <ToDoItem
-              className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
-              key={todo.id}
-              todo={todo}
-              completed={todo.completed}
-              onToggleComplete={handleToggleComplete}
-              onDelete={handleDeleteTodo}
-            />
-          )) || null}
+          {(isClient &&
+            todos?.map((todo) => (
+              <ToDoItem
+                className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
+                key={todo.id}
+                todo={todo}
+                completed={todo.completed}
+                onToggleComplete={handleToggleComplete}
+                onDelete={handleDeleteTodo}
+              />
+            ))) ||
+            null}
         </div>
 
         <div className="footer-mobile flex items-center justify-between border-t-0 border-clr-todo-borders px-5 py-4 ">
-          <p>{incompleteTodoText}</p>
+          {isClient ? <p>{incompleteTodoText}</p> : <p>Loading...</p>}
+
           <div className="hidden items-center gap-3 md:flex">
             <p>All</p>
             <p>Active</p>
