@@ -103,6 +103,17 @@ export function useIsClient(): boolean {
   return isClient;
 }
 
+//! Usage example:
+// const DemoComponent = () => {
+//   const isClient = useIsClient();
+
+//   return (
+//     <div className="some-container">
+//       {isClient? <p>Value from localStorage</p> : <p>Loading..</p>} - to avoid layout shifts
+//     </div
+//   )
+// }
+
 // export default LocalStorageDemo;
 
 // from Gemini

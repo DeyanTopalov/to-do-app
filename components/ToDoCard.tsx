@@ -1,8 +1,9 @@
 "use client";
 import ToDoForm from "./ToDoForm";
 import ToDoItem from "./ToDoItem";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocalStorage, useIsClient } from "@lib/hooks";
+import { clear } from "console";
 
 const ToDoCard = () => {
   const isClient = useIsClient();
@@ -57,6 +58,7 @@ const ToDoCard = () => {
   const incompleteTodos = todos?.filter((todo) => !todo.completed).length ?? 0;
 
   const incompleteText = incompleteTodos === 1 ? "item left" : "items left";
+
   const incompleteTodoText = `${incompleteTodos} ${incompleteText}`;
 
   return (
@@ -101,7 +103,13 @@ const ToDoCard = () => {
             <p>Active</p>
             <p>Completed</p>
           </div>
-          <p>Clear Completed</p>
+          <button
+            aria-label="Clear Completed"
+            type="button"
+            onClick={clearCompletedTodos}
+          >
+            Clear Completed
+          </button>
         </div>
       </div>
       <div className="footer-desktop flex items-center justify-center gap-5 rounded-lg  bg-white px-5 py-4 md:hidden">
