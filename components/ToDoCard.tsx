@@ -1,6 +1,7 @@
 "use client";
 import ToDoForm from "./ToDoForm";
 import ToDoItem from "./ToDoItem";
+import ThemeSwitch from "./ThemeSwitch";
 import { useState } from "react";
 import { useLocalStorage, useIsClient } from "@lib/hooks";
 
@@ -86,7 +87,7 @@ const ToDoCard = () => {
       <div className=" mt-10 w-full ">
         <div className="mb-10 flex items-center justify-between">
           <h1 className="text-3xl font-bold ">T O D O</h1>
-          <div className="b-1 size-7 rounded-full border-slate-300 bg-slate-700"></div>
+          <ThemeSwitch />
         </div>
         <ToDoForm
           className="mb-4 flex scale-100 items-center gap-3 rounded-lg bg-white px-5 py-4 shadow-md"
