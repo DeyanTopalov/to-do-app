@@ -5,14 +5,39 @@ import { useState } from "react";
 import { useLocalStorage, useIsClient } from "@lib/hooks";
 
 const ToDoCard = () => {
+  //? checks if the page is rendered on the client
   const isClient = useIsClient();
+
+  //? state to manage todo items on localStorage
   const [todos, setTodos, removeTodos] = useLocalStorage<ToDo[] | undefined>(
     "todos",
     undefined,
   );
+
+  //? state to manage new todo item
   const [newToDo, setNewTodo] = useState<string>("");
+
+  //? state to manage filter (all, active, completed)
   const [filter, setFilter] = useState<string>("all"); // State to manage filter (all, active, completed)
 
+  //? responsible for updating the input field value as the user types.
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTodo(e.target.value);
+  };
+
+  //? responsible for adding a new todo when the form is submitted. Relies on the newToDo state, which is updated by handleInputChange, to know what todo to add.
+  const addToDo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newToDo.trim() !== "") {
+      const newTodo = {
+        id: todos?.length ? todos[todos.length - 1].id + 1 : 1,
+        title: newToDo,
+        completed: false,
+      };
+      setTodos([...(todos || []), newTodo]);
+      setNewTodo("");
+    }
+  };
   const handleToggleComplete = (id: number) => {
     if (todos) {
       const updatedTodos = todos.map((todo) =>
@@ -27,23 +52,6 @@ const ToDoCard = () => {
       const updatedTodos = todos.filter((todo) => todo.id !== id);
       setTodos(updatedTodos);
     }
-  };
-
-  const addToDo = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (newToDo.trim() !== "") {
-      const newTodo = {
-        id: todos?.length ? todos[todos.length - 1].id + 1 : 1,
-        title: newToDo,
-        completed: false,
-      };
-      setTodos([...(todos || []), newTodo]);
-      setNewTodo("");
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTodo(e.target.value);
   };
 
   const clearCompletedTodos = () => {
@@ -143,9 +151,27 @@ const ToDoCard = () => {
         </div>
       </div>
       <div className="footer-desktop flex items-center justify-center gap-5 rounded-lg  bg-white px-5 py-4 md:hidden">
-        <p>All</p>
-        <p>Active</p>
-        <p>Completed</p>
+        <button
+          aria-label="Show All"
+          type="button"
+          onClick={() => setFilter("all")}
+        >
+          All
+        </button>
+        <button
+          aria-label="Show Active"
+          type="button"
+          onClick={() => setFilter("active")}
+        >
+          Active
+        </button>
+        <button
+          aria-label="Show Completed"
+          type="button"
+          onClick={() => setFilter("completed")}
+        >
+          Completed
+        </button>
       </div>
     </div>
   );
