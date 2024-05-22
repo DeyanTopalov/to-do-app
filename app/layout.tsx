@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${josefinSans.className} grid h-svh w-svw place-items-center  gap-0 bg-clr-app-bg text-left text-lg antialiased md:h-screen md:w-full`}
       >
@@ -28,4 +28,4 @@ export default function RootLayout({
   );
 }
 
-// suppressHydrationWarning
+// inside html: suppressHydrationWarning - to avoid Hydration error due to extra class of light or dark

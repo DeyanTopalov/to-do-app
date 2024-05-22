@@ -8,6 +8,7 @@ export default function ThemeSwitch() {
   const isClient = useIsClient();
   const { theme, setTheme } = useTheme();
 
+  // Placeholder for SSR to avaoid layout shift
   if (!isClient)
     return (
       <div className="size-7 rounded-full border-2 border-slate-300 "></div>

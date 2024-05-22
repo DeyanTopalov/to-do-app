@@ -20,7 +20,7 @@ const ToDoForm = ({ className, onSubmit, value, onChange }: FormProps) => {
       <Input
         type="text"
         placeholder="Create a new todo..."
-        className="border-0 text-lg focus:scale-100"
+        className="border-0 bg-inherit text-lg focus:scale-100"
         value={value}
         onChange={onChange}
       />

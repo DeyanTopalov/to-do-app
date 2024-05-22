@@ -90,7 +90,7 @@ const ToDoCard = () => {
           <ThemeSwitch />
         </div>
         <ToDoForm
-          className="mb-4 flex scale-100 items-center gap-3 rounded-lg bg-white px-5 py-4 shadow-md"
+          className="mb-4 flex scale-100 items-center gap-3 rounded-lg bg-clr-card-bg px-5 py-4 shadow-md"
           onSubmit={addToDo}
           onChange={handleInputChange}
           value={newToDo}
@@ -99,7 +99,7 @@ const ToDoCard = () => {
 
       <div
         className="to-do-card
-       mb-4  overflow-x-hidden rounded-lg bg-white shadow-md"
+       mb-4  overflow-x-hidden rounded-lg bg-clr-card-bg shadow-md"
       >
         <div className="todo-container max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain">
           {(isClient &&
