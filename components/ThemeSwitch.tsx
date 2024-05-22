@@ -6,7 +6,8 @@ import { IconSun, IconMoon } from "./ui/icons";
 
 export default function ThemeSwitch() {
   const isClient = useIsClient();
-  const { theme, setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
+  //! important use {setTheme, resolvedTheme} instead of { theme, setTheme} - otherwise the initial theme based on system preferences might not be caught in the if / else logic below
 
   // Placeholder for SSR to avaoid layout shift
   if (!isClient)
@@ -14,7 +15,7 @@ export default function ThemeSwitch() {
       <div className="size-7 rounded-full border-2 border-slate-300 "></div>
     );
 
-  if (theme === "dark") {
+  if (resolvedTheme === "dark") {
     return (
       <button
         key="light-theme-btn"
