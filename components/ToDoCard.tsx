@@ -151,7 +151,7 @@ const ToDoCard = () => {
           </button>
         </div>
       </div>
-      <div className="footer-desktop flex items-center justify-center gap-5 rounded-lg  bg-white px-5 py-4 md:hidden">
+      <div className="footer-desktop flex items-center justify-center gap-5 rounded-lg  bg-clr-card-bg px-5 py-4 md:hidden">
         <button
           aria-label="Show All"
           type="button"
