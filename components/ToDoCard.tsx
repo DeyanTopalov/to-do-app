@@ -84,7 +84,7 @@ const ToDoCard = () => {
 
   return (
     <div className="relative w-full max-w-[33.75rem]">
-      <div className=" mt-10 w-full ">
+      <div className=" mt-10 w-full md:mt-[4.375rem] ">
         <div className="mb-10 flex items-center justify-between">
           <h1 className="text-3xl font-bold ">T O D O</h1>
           <ThemeSwitch />

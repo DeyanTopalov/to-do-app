@@ -28,7 +28,7 @@ const ToDoItem = ({
         {todo.title}
       </p>
       <button
-        className=" flex size-6 shrink-0 items-center justify-center rounded-full border border-slate-300"
+        className=" flex size-6 shrink-0 items-center justify-center rounded-full"
         aria-label="Delete Todo"
         type="button"
         onClick={() => {
@@ -38,7 +38,7 @@ const ToDoItem = ({
         }}
       >
         <p className="sr-only">Delete</p>
-        <DeleteIcon className="fill-red-500" />
+        <DeleteIcon className="fill-clr-todo-placeholder" />
       </button>
     </div>
   );

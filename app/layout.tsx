@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { josefinSans } from "./ui/fonts";
 import "@styles/globals.css";
 import { Providers } from "./providers";
+import { BackgroundLight } from "@components/ui/icons";
+import ThemeBgImage from "@components/ThemeBgImage";
 
 export const metadata: Metadata = {
   title: "ToDo App",
@@ -19,6 +21,9 @@ export default function RootLayout({
         className={`${josefinSans.className} grid h-svh w-svw place-items-center  gap-0 bg-clr-app-bg text-left text-lg antialiased md:h-screen md:w-full`}
       >
         <Providers>
+          <div className="absolute top-0 -z-10 h-[200px] w-full overflow-hidden md:h-[300px]">
+            <ThemeBgImage />
+          </div>
           <main className="grid h-svh w-svw px-6 md:max-w-[90rem]">
             {children}
           </main>
