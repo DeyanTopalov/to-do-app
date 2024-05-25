@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { josefinSans } from "./ui/fonts";
 import "@styles/globals.css";
 import { Providers } from "./providers";
-import { BackgroundLight } from "@components/ui/icons";
 import ThemeBgImage from "@components/ThemeBgImage";
 
 export const metadata: Metadata = {

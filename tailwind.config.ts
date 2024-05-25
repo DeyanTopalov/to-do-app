@@ -27,7 +27,7 @@ const config = {
         "clr-todo-text": "hsla(var(--todo-text))",
         "clr-todo-borders": "hsla(var(--todo-borders))",
         "clr-todo-placeholder": "hsla(var(--todo-placeholder))",
-        "clr-completed": "hsla(var(--completed))",
+        "clr-completed": "hsla(var(--todo-completed))",
         "clr-footer": "hsla(var(--footer))",
 
         border: "hsl(var(--border))",

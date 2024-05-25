@@ -16,7 +16,7 @@ const ToDoItem = ({
   return (
     <div className={className}>
       <Checkbox
-        className={`size-6 shrink-0 rounded-full border-slate-300  ${completed ? "bg-red-500" : "bg-blue-300"}`}
+        className={`size-6 shrink-0 rounded-full border-clr-completed  ${completed ? "bg-gradient-to-br from-clr-linear-start to-clr-linear-end" : ""}`}
         checked={completed}
         onClick={() => {
           if (onToggleComplete) {
@@ -24,7 +24,7 @@ const ToDoItem = ({
           }
         }}
       />
-      <p className="line-clamp-1 w-full grow-0  group-hover:line-clamp-none">
+      <p className="line-clamp-1 w-full grow-0 text-clr-todo-text  group-hover:line-clamp-none">
         {todo.title}
       </p>
       <button
