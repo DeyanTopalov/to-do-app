@@ -86,7 +86,7 @@ const ToDoCard = () => {
     <div className="relative w-full max-w-[33.75rem]">
       <div className=" mt-10 w-full md:mt-[4.375rem] ">
         <div className="mb-10 flex items-center justify-between">
-          <h1 className="text-3xl font-bold ">T O D O</h1>
+          <h1 className="text-3xl font-bold text-white">T O D O</h1>
           <ThemeSwitch />
         </div>
         <ToDoForm
@@ -116,16 +116,22 @@ const ToDoCard = () => {
             null}
         </div>
 
-        <div className="footer-mobile flex items-center justify-between border-t-0 border-clr-todo-borders px-5 py-4 ">
-          {isClient ? <p>{incompleteTodoText}</p> : <p>Loading...</p>}
-
-          <div className="hidden items-center gap-3 md:flex">
+        <div className="flex items-center justify-between border-t-0 border-clr-todo-borders px-5 py-4 ">
+          {isClient ? (
+            <p className="focus:text-clr-clr-todo-text text-base font-normal text-clr-completed hover:font-medium hover:text-clr-todo-text md:text-lg">
+              {incompleteTodoText}
+            </p>
+          ) : (
+            <p>Loading...</p>
+          )}
+          {/* Footer desktop */}
+          <div className="hidden items-center gap-3 font-bold text-clr-completed md:flex">
             <button
               aria-label="Show All"
               type="button"
               onClick={() => setFilter("all")}
-              className={`"focus:font-bold focus:text-clr-focus-blue
-          ${filter === "all" && "font-bold text-clr-focus-blue"}`}
+              className={`cursor-pointer hover:text-clr-todo-text  focus:text-clr-focus-blue
+          ${filter === "all" && "text-clr-focus-blue"}`}
             >
               All
             </button>
@@ -133,8 +139,8 @@ const ToDoCard = () => {
               aria-label="Show Active"
               type="button"
               onClick={() => setFilter("active")}
-              className={`"focus:font-bold focus:text-clr-focus-blue
-          ${filter === "active" && "font-bold text-clr-focus-blue"}`}
+              className={`cursor-pointer hover:text-clr-todo-text  focus:text-clr-focus-blue
+          ${filter === "active" && "text-clr-focus-blue"}`}
             >
               Active
             </button>
@@ -142,8 +148,8 @@ const ToDoCard = () => {
               aria-label="Show Completed"
               type="button"
               onClick={() => setFilter("completed")}
-              className={`"focus:font-bold focus:text-clr-focus-blue
-          ${filter === "completed" && "font-bold text-clr-focus-blue"}`}
+              className={`cursor-pointer hover:text-clr-todo-text  focus:text-clr-focus-blue
+          ${filter === "completed" && "text-clr-focus-blue"}`}
             >
               Completed
             </button>
@@ -152,19 +158,21 @@ const ToDoCard = () => {
             aria-label="Clear Completed"
             type="button"
             onClick={clearCompletedTodos}
+            className="focus:text-clr-clr-todo-text cursor-pointer text-base font-normal text-clr-completed hover:font-medium hover:text-clr-todo-text md:text-lg"
           >
             Clear Completed
           </button>
         </div>
       </div>
-      <div className="footer-desktop flex items-center justify-center gap-5 rounded-lg  bg-clr-card-bg px-5 py-4 md:hidden">
+      {/* Footer mobile */}
+      <div className="flex items-center justify-center gap-5 rounded-lg  bg-clr-card-bg px-5 py-4 text-base font-bold text-clr-completed md:hidden">
         <button
           aria-label="Show All"
           type="button"
           onClick={() => setFilter("all")}
           role="button"
-          className={`"focus:font-bold focus:text-clr-focus-blue
-          ${filter === "all" && "font-bold text-clr-focus-blue"}`}
+          className={`cursor-pointer focus:text-clr-focus-blue
+          ${filter === "all" && "text-clr-focus-blue"}`}
         >
           All
         </button>
@@ -172,8 +180,8 @@ const ToDoCard = () => {
           aria-label="Show Active"
           type="button"
           onClick={() => setFilter("active")}
-          className={`"focus:font-bold focus:text-clr-focus-blue
-          ${filter === "active" && "font-bold text-clr-focus-blue"}`}
+          className={`cursor-pointer focus:text-clr-focus-blue
+          ${filter === "active" && "text-clr-focus-blue"}`}
         >
           Active
         </button>
@@ -181,8 +189,8 @@ const ToDoCard = () => {
           aria-label="Show Completed"
           type="button"
           onClick={() => setFilter("completed")}
-          className={`"focus:font-bold focus:text-clr-focus-blue
-          ${filter === "completed" && "font-bold text-clr-focus-blue"}`}
+          className={`cursor-pointer focus:text-clr-focus-blue
+          ${filter === "completed" && "text-clr-focus-blue"}`}
         >
           Completed
         </button>

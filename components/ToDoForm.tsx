@@ -11,7 +11,7 @@ const ToDoForm = ({ className, onSubmit, value, onChange }: FormProps) => {
   return (
     <form className={className} onSubmit={onSubmit}>
       <button
-        className="flex size-6 shrink-0 items-center justify-center rounded-full border border-clr-completed"
+        className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full border border-clr-completed"
         type="submit"
         aria-label="Add Todo"
         role="button"
@@ -21,7 +21,7 @@ const ToDoForm = ({ className, onSubmit, value, onChange }: FormProps) => {
       <Input
         type="text"
         placeholder="Create a new todo..."
-        className="border-0 bg-inherit text-lg focus:scale-100"
+        className="border-0 bg-inherit text-lg focus:scale-100 focus-visible:ring-2 focus-visible:ring-clr-completed focus-visible:ring-offset-2"
         value={value}
         onChange={onChange}
       />

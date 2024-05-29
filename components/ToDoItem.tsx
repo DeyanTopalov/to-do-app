@@ -16,7 +16,7 @@ const ToDoItem = ({
   return (
     <div className={className}>
       <Checkbox
-        className={`size-6 shrink-0 rounded-full border-clr-completed  ${completed ? "bg-gradient-to-br from-clr-linear-start to-clr-linear-end" : ""}`}
+        className={`size-6 shrink-0 cursor-pointer rounded-full border-clr-completed text-white ${completed ? "bg-gradient-to-br from-clr-linear-start to-clr-linear-end" : ""}`}
         checked={completed}
         onClick={() => {
           if (onToggleComplete) {
@@ -24,11 +24,13 @@ const ToDoItem = ({
           }
         }}
       />
-      <p className="line-clamp-1 w-full grow-0 text-clr-todo-text  group-hover:line-clamp-none">
+      <p
+        className={`line-clamp-1 w-full grow-0   group-hover:line-clamp-none  ${completed ? "text-clr-completed line-through" : "text-clr-todo-text"}`}
+      >
         {todo.title}
       </p>
       <button
-        className=" flex size-6 shrink-0 items-center justify-center rounded-full"
+        className="flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full"
         aria-label="Delete Todo"
         type="button"
         onClick={() => {
