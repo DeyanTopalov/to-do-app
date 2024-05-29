@@ -124,6 +124,8 @@ const ToDoCard = () => {
               aria-label="Show All"
               type="button"
               onClick={() => setFilter("all")}
+              className={`"focus:font-bold focus:text-clr-focus-blue
+          ${filter === "all" && "font-bold text-clr-focus-blue"}`}
             >
               All
             </button>
@@ -131,6 +133,8 @@ const ToDoCard = () => {
               aria-label="Show Active"
               type="button"
               onClick={() => setFilter("active")}
+              className={`"focus:font-bold focus:text-clr-focus-blue
+          ${filter === "active" && "font-bold text-clr-focus-blue"}`}
             >
               Active
             </button>
@@ -138,6 +142,8 @@ const ToDoCard = () => {
               aria-label="Show Completed"
               type="button"
               onClick={() => setFilter("completed")}
+              className={`"focus:font-bold focus:text-clr-focus-blue
+          ${filter === "completed" && "font-bold text-clr-focus-blue"}`}
             >
               Completed
             </button>
@@ -156,6 +162,9 @@ const ToDoCard = () => {
           aria-label="Show All"
           type="button"
           onClick={() => setFilter("all")}
+          role="button"
+          className={`"focus:font-bold focus:text-clr-focus-blue
+          ${filter === "all" && "font-bold text-clr-focus-blue"}`}
         >
           All
         </button>
@@ -163,6 +172,8 @@ const ToDoCard = () => {
           aria-label="Show Active"
           type="button"
           onClick={() => setFilter("active")}
+          className={`"focus:font-bold focus:text-clr-focus-blue
+          ${filter === "active" && "font-bold text-clr-focus-blue"}`}
         >
           Active
         </button>
@@ -170,6 +181,8 @@ const ToDoCard = () => {
           aria-label="Show Completed"
           type="button"
           onClick={() => setFilter("completed")}
+          className={`"focus:font-bold focus:text-clr-focus-blue
+          ${filter === "completed" && "font-bold text-clr-focus-blue"}`}
         >
           Completed
         </button>

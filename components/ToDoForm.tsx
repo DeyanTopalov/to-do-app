@@ -1,4 +1,5 @@
 import { Input } from "./ui/input";
+import { Plus } from "lucide-react";
 
 interface FormProps extends classNameProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -10,12 +11,12 @@ const ToDoForm = ({ className, onSubmit, value, onChange }: FormProps) => {
   return (
     <form className={className} onSubmit={onSubmit}>
       <button
-        className="flex size-6 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-blue-200"
+        className="flex size-6 shrink-0 items-center justify-center rounded-full border border-clr-completed"
         type="submit"
         aria-label="Add Todo"
         role="button"
       >
-        +
+        <Plus className="w-4/5" />
       </button>
       <Input
         type="text"
