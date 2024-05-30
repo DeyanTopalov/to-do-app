@@ -1,5 +1,5 @@
 import { Checkbox } from "./ui/checkbox";
-import { DeleteIcon } from "./ui/icons";
+import { Trash2 } from "lucide-react";
 
 interface ItemProps extends classNameProps, TodoItemProps {
   completed: boolean;
@@ -40,7 +40,7 @@ const ToDoItem = ({
         }}
       >
         <p className="sr-only">Delete</p>
-        <DeleteIcon className="fill-clr-todo-placeholder" />
+        <Trash2 className="text-clr-todo-placeholder" />
       </button>
     </div>
   );

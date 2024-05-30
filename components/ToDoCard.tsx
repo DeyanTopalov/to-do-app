@@ -5,7 +5,7 @@ import ThemeSwitch from "./ThemeSwitch";
 import { useState, useEffect } from "react";
 import { useLocalStorage, useIsClient } from "@lib/hooks";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Reorder } from "framer-motion";
+import { Reorder, motion } from "framer-motion";
 
 const ToDoCard = () => {
   //? checks if the page is rendered on the client
@@ -104,7 +104,15 @@ const ToDoCard = () => {
   };
 
   return (
-    <div className="relative w-full max-w-[33.75rem]">
+    <motion.div
+      className="relative w-full max-w-[33.75rem]"
+      // // initial={{ opacity: 0 }}
+      // // animate={{ opacity: 1 }}
+      // animate={{ x: [null, 100, 0] }}
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7 }}
+    >
       <div className=" mt-10 w-full md:mt-[4.375rem] ">
         <div className="mb-10 flex items-center justify-between">
           <h1 className="text-3xl font-bold text-white">T O D O</h1>
@@ -261,7 +269,7 @@ const ToDoCard = () => {
           </TabsTrigger>
         </TabsList>
       </Tabs>
-    </div>
+    </motion.div>
   );
 };
 
