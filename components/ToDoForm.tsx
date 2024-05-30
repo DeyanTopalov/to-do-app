@@ -16,7 +16,7 @@ const ToDoForm = ({ className, onSubmit, value, onChange }: FormProps) => {
         aria-label="Add Todo"
         role="button"
       >
-        <Plus className="w-4/5" />
+        <Plus className="w-4/5 text-clr-completed" />
       </button>
       <Input
         type="text"
