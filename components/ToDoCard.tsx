@@ -2,8 +2,10 @@
 import ToDoForm from "./ToDoForm";
 import ToDoItem from "./ToDoItem";
 import ThemeSwitch from "./ThemeSwitch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocalStorage, useIsClient } from "@lib/hooks";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Reorder } from "framer-motion";
 
 const ToDoCard = () => {
   //? checks if the page is rendered on the client
@@ -17,9 +19,6 @@ const ToDoCard = () => {
 
   //? state to manage new todo item
   const [newToDo, setNewTodo] = useState<string>("");
-
-  //? state to manage filter (all, active, completed)
-  const [filter, setFilter] = useState<string>("all"); // State to manage filter (all, active, completed)
 
   //? responsible for updating the input field value as the user types.
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,15 +64,6 @@ const ToDoCard = () => {
   //     removeTodos();
   //   };
 
-  const filteredTodos = todos?.filter((todo) => {
-    if (filter === "active") {
-      return !todo.completed;
-    } else if (filter === "completed") {
-      return todo.completed;
-    }
-    return true; // "all" filter, return all todos
-  });
-
   const countIncompleteTodos =
     todos?.filter((todo) => !todo.completed).length ?? 0;
 
@@ -81,6 +71,37 @@ const ToDoCard = () => {
     countIncompleteTodos === 1 ? "item left" : "items left";
 
   const incompleteTodoText = `${countIncompleteTodos} ${incompleteText}`;
+
+  const [allTodos, setAllTodos] = useState<ToDo[]>([]); // All todos list
+  const [activeTodos, setActiveTodos] = useState<ToDo[]>([]); // Active todos list
+  const [completedTodos, setCompletedTodos] = useState<ToDo[]>([]); // Completed todos list
+
+  useEffect(() => {
+    if (!todos) return;
+    setAllTodos(todos); // All todos
+    setActiveTodos(todos.filter((todo) => !todo.completed)); // Active todos
+    setCompletedTodos(todos.filter((todo) => todo.completed)); // Completed todos
+  }, [todos]);
+
+  const updateOrder = (
+    newOrder: ToDo[],
+    type: "all" | "active" | "completed",
+  ) => {
+    if (type === "all") {
+      setTodos(newOrder);
+    } else {
+      setTodos((prevTodos) => {
+        if (!prevTodos) return [];
+        const reorderedIds = newOrder.map((todo) => todo.id);
+        const reorderedSet = new Set(reorderedIds);
+
+        const otherTodos = prevTodos.filter(
+          (todo) => !reorderedSet.has(todo.id),
+        );
+        return [...newOrder, ...otherTodos];
+      });
+    }
+  };
 
   return (
     <div className="relative w-full max-w-[33.75rem]">
@@ -90,113 +111,162 @@ const ToDoCard = () => {
           <ThemeSwitch />
         </div>
         <ToDoForm
-          className="mb-4 flex scale-100 items-center gap-3 rounded-lg bg-clr-card-bg px-5 py-4 shadow-md"
+          className="mb-4 flex scale-100 items-center gap-3 rounded-xl bg-clr-card-bg px-5 py-3 shadow-md md:py-4"
           onSubmit={addToDo}
           onChange={handleInputChange}
           value={newToDo}
         />
       </div>
 
-      <div
-        className="to-do-card
-       mb-4  overflow-x-hidden rounded-lg bg-clr-card-bg shadow-md"
-      >
-        <div className="todo-container max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain">
-          {(isClient &&
-            filteredTodos?.map((todo) => (
-              <ToDoItem
-                className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
-                key={todo.id}
-                todo={todo}
-                completed={todo.completed}
-                onToggleComplete={handleToggleComplete}
-                onDelete={handleDeleteTodo}
-              />
-            ))) ||
-            null}
-        </div>
+      <Tabs defaultValue="All" className="">
+        <section className=" overflow-x-hidden rounded-lg bg-clr-card-bg  shadow-md ">
+          <TabsContent
+            value="All"
+            className="max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
+          >
+            <Reorder.Group
+              values={allTodos}
+              onReorder={(newOrder) => updateOrder(newOrder, "all")}
+            >
+              {(isClient &&
+                allTodos?.map((todo) => (
+                  <Reorder.Item key={todo.id} value={todo}>
+                    <ToDoItem
+                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
+                      key={todo.id}
+                      todo={todo}
+                      completed={todo.completed}
+                      onToggleComplete={handleToggleComplete}
+                      onDelete={handleDeleteTodo}
+                    />
+                  </Reorder.Item>
+                ))) ||
+                null}
+            </Reorder.Group>
+          </TabsContent>
+          <TabsContent
+            value="Active"
+            className="max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
+          >
+            <Reorder.Group
+              values={activeTodos}
+              onReorder={(newOrder) => updateOrder(newOrder, "active")}
+            >
+              {(isClient &&
+                activeTodos?.map((todo) => (
+                  <Reorder.Item key={todo.id} value={todo}>
+                    <ToDoItem
+                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
+                      key={todo.id}
+                      todo={todo}
+                      completed={todo.completed}
+                      onToggleComplete={handleToggleComplete}
+                      onDelete={handleDeleteTodo}
+                    />
+                  </Reorder.Item>
+                ))) ||
+                null}
+            </Reorder.Group>
+          </TabsContent>
+          <TabsContent
+            value="Completed"
+            className="max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
+          >
+            <Reorder.Group
+              values={completedTodos}
+              onReorder={(newOrder) => updateOrder(newOrder, "completed")}
+            >
+              {(isClient &&
+                completedTodos?.map((todo) => (
+                  <Reorder.Item key={todo.id} value={todo}>
+                    <ToDoItem
+                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
+                      key={todo.id}
+                      todo={todo}
+                      completed={todo.completed}
+                      onToggleComplete={handleToggleComplete}
+                      onDelete={handleDeleteTodo}
+                    />
+                  </Reorder.Item>
+                ))) ||
+                null}
+            </Reorder.Group>
+          </TabsContent>
 
-        <div className="flex items-center justify-between border-t-0 border-clr-todo-borders px-5 py-4 ">
-          {isClient ? (
-            <p className="focus:text-clr-clr-todo-text text-base font-normal text-clr-completed hover:font-medium hover:text-clr-todo-text md:text-lg">
-              {incompleteTodoText}
-            </p>
-          ) : (
-            <p>Loading...</p>
-          )}
-          {/* Footer desktop */}
-          <div className="hidden items-center gap-3 font-bold text-clr-completed md:flex">
+          <div className="flex items-center justify-between border-t-0 border-clr-todo-borders px-5 py-4 ">
+            {isClient ? (
+              <p className="focus:text-clr-clr-todo-text text-base font-normal text-clr-completed hover:font-medium hover:text-clr-todo-text md:text-lg">
+                {incompleteTodoText}
+              </p>
+            ) : (
+              <p>Loading...</p>
+            )}
+            {/* Footer desktop */}
+            <TabsList className="bg-inherite hidden items-center gap-3 font-bold text-clr-completed md:flex">
+              <TabsTrigger
+                value="All"
+                className="cursor-pointer text-base hover:text-clr-todo-text
+                md:text-lg"
+              >
+                All
+              </TabsTrigger>
+              <TabsTrigger
+                value="Active"
+                className="cursor-pointer text-base hover:text-clr-todo-text
+                md:text-lg"
+              >
+                Active
+              </TabsTrigger>
+              <TabsTrigger
+                value="Completed"
+                className="cursor-pointer text-base hover:text-clr-todo-text
+                md:text-lg"
+              >
+                Completed
+              </TabsTrigger>
+            </TabsList>
             <button
-              aria-label="Show All"
+              aria-label="Clear Completed"
               type="button"
-              onClick={() => setFilter("all")}
-              className={`cursor-pointer hover:text-clr-todo-text  focus:text-clr-focus-blue
-          ${filter === "all" && "text-clr-focus-blue"}`}
+              onClick={clearCompletedTodos}
+              className="focus:text-clr-clr-todo-text cursor-pointer text-base font-normal text-clr-completed hover:font-medium hover:text-clr-todo-text md:text-lg"
             >
-              All
-            </button>
-            <button
-              aria-label="Show Active"
-              type="button"
-              onClick={() => setFilter("active")}
-              className={`cursor-pointer hover:text-clr-todo-text  focus:text-clr-focus-blue
-          ${filter === "active" && "text-clr-focus-blue"}`}
-            >
-              Active
-            </button>
-            <button
-              aria-label="Show Completed"
-              type="button"
-              onClick={() => setFilter("completed")}
-              className={`cursor-pointer hover:text-clr-todo-text  focus:text-clr-focus-blue
-          ${filter === "completed" && "text-clr-focus-blue"}`}
-            >
-              Completed
+              Clear Completed
             </button>
           </div>
-          <button
-            aria-label="Clear Completed"
-            type="button"
-            onClick={clearCompletedTodos}
-            className="focus:text-clr-clr-todo-text cursor-pointer text-base font-normal text-clr-completed hover:font-medium hover:text-clr-todo-text md:text-lg"
+        </section>
+
+        {/* Footer Mobile */}
+        <TabsList className="mt-4 flex items-center justify-center gap-5 rounded-lg  bg-clr-card-bg px-5 py-4 text-base font-bold text-clr-completed md:hidden">
+          <TabsTrigger
+            value="All"
+            className="cursor-pointer text-base hover:text-clr-todo-text
+                md:text-lg"
           >
-            Clear Completed
-          </button>
-        </div>
-      </div>
-      {/* Footer mobile */}
-      <div className="flex items-center justify-center gap-5 rounded-lg  bg-clr-card-bg px-5 py-4 text-base font-bold text-clr-completed md:hidden">
-        <button
-          aria-label="Show All"
-          type="button"
-          onClick={() => setFilter("all")}
-          role="button"
-          className={`cursor-pointer focus:text-clr-focus-blue
-          ${filter === "all" && "text-clr-focus-blue"}`}
-        >
-          All
-        </button>
-        <button
-          aria-label="Show Active"
-          type="button"
-          onClick={() => setFilter("active")}
-          className={`cursor-pointer focus:text-clr-focus-blue
-          ${filter === "active" && "text-clr-focus-blue"}`}
-        >
-          Active
-        </button>
-        <button
-          aria-label="Show Completed"
-          type="button"
-          onClick={() => setFilter("completed")}
-          className={`cursor-pointer focus:text-clr-focus-blue
-          ${filter === "completed" && "text-clr-focus-blue"}`}
-        >
-          Completed
-        </button>
-      </div>
+            All
+          </TabsTrigger>
+          <TabsTrigger
+            value="Active"
+            className="cursor-pointer text-base hover:text-clr-todo-text
+                md:text-lg"
+          >
+            Active
+          </TabsTrigger>
+          <TabsTrigger
+            value="Completed"
+            className="cursor-pointer text-base hover:text-clr-todo-text
+                md:text-lg"
+          >
+            Completed
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
     </div>
   );
 };
 
 export default ToDoCard;
+
+// Next steps:
+// Delete test components
+// Refactor

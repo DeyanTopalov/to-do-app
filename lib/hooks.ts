@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 // Define a generic type for the data you want to store in local storage
 type StoredValue<T> = T | undefined;
 
-// Define the hook
 export function useLocalStorage<T>(
   key: string,
   initialValue?: T,
-): [StoredValue<T>, (value: T) => void, () => void] {
+): [
+  StoredValue<T>,
+  (value: T | ((val: T | undefined) => T)) => void,
+  () => void,
+] {
   // Initialize state with the value from local storage, if it exists
   const [storedValue, setStoredValue] = useState<StoredValue<T>>(() => {
     try {
@@ -20,10 +23,13 @@ export function useLocalStorage<T>(
   });
 
   // Update local storage whenever the state changes
-  const setValue = (value: T) => {
+  const setValue = (value: T | ((val: T | undefined) => T)) => {
     try {
-      setStoredValue(value);
-      window.localStorage.setItem(key, JSON.stringify(value));
+      // Check if the value is a function and call it with the current state
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.error("Error setting local storage:", error);
     }
