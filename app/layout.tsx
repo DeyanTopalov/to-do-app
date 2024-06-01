@@ -23,7 +23,7 @@ export default function RootLayout({
           <div className="absolute top-0 -z-10 h-[200px] w-full overflow-hidden md:h-[300px]">
             <ThemeBgImage />
           </div>
-          <main className="grid h-svh w-svw px-6 md:max-w-[90rem]">
+          <main className="grid h-svh w-svw px-3 md:max-w-[90rem]">
             {children}
           </main>
         </Providers>
@@ -33,3 +33,4 @@ export default function RootLayout({
 }
 
 // inside html: suppressHydrationWarning - to avoid Hydration error due to extra class of light or dark
+// px-6

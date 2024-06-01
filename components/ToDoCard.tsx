@@ -106,9 +106,6 @@ const ToDoCard = () => {
   return (
     <motion.div
       className="relative w-full max-w-[33.75rem]"
-      // // initial={{ opacity: 0 }}
-      // // animate={{ opacity: 1 }}
-      // animate={{ x: [null, 100, 0] }}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.7 }}
@@ -130,17 +127,19 @@ const ToDoCard = () => {
         <section className=" overflow-x-hidden rounded-lg bg-clr-card-bg  shadow-md ">
           <TabsContent
             value="All"
-            className="max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
+            className="h-[19rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain md:h-[22.75rem]"
           >
             <Reorder.Group
               values={allTodos}
               onReorder={(newOrder) => updateOrder(newOrder, "all")}
+              layoutScroll
             >
               {(isClient &&
                 allTodos?.map((todo) => (
                   <Reorder.Item key={todo.id} value={todo}>
+                    {/* if no grip: gap-3 px-5 */}
                     <ToDoItem
-                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
+                      className="group flex snap-start items-center justify-between gap-2 border-b border-clr-todo-borders py-4 pl-3 pr-5 "
                       key={todo.id}
                       todo={todo}
                       completed={todo.completed}
@@ -154,17 +153,18 @@ const ToDoCard = () => {
           </TabsContent>
           <TabsContent
             value="Active"
-            className="max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
+            className="h-[19rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain md:h-[22.75rem]"
           >
             <Reorder.Group
               values={activeTodos}
               onReorder={(newOrder) => updateOrder(newOrder, "active")}
+              layoutScroll
             >
               {(isClient &&
                 activeTodos?.map((todo) => (
                   <Reorder.Item key={todo.id} value={todo}>
                     <ToDoItem
-                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
+                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  py-4 pl-3 pr-5 "
                       key={todo.id}
                       todo={todo}
                       completed={todo.completed}
@@ -178,17 +178,18 @@ const ToDoCard = () => {
           </TabsContent>
           <TabsContent
             value="Completed"
-            className="max-h-[22.75rem] min-h-[7.75rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain"
+            className="h-[19rem] snap-y snap-mandatory overflow-y-auto overscroll-y-contain md:h-[22.75rem]"
           >
             <Reorder.Group
               values={completedTodos}
               onReorder={(newOrder) => updateOrder(newOrder, "completed")}
+              layoutScroll
             >
               {(isClient &&
                 completedTodos?.map((todo) => (
                   <Reorder.Item key={todo.id} value={todo}>
                     <ToDoItem
-                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  px-5 py-4 "
+                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  py-4 pl-3 pr-5 "
                       key={todo.id}
                       todo={todo}
                       completed={todo.completed}
@@ -277,4 +278,5 @@ export default ToDoCard;
 
 // Next steps:
 // Delete test components
+// Decide on the grip for drag
 // Refactor
