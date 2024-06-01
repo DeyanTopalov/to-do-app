@@ -46,6 +46,9 @@
 }
 
 
+.touch-control {
+  touch-action: none;
+}
 
 .test {
   color: hsl(237, 14%, 26%);

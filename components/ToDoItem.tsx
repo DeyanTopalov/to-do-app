@@ -1,5 +1,5 @@
 import { Checkbox } from "./ui/checkbox";
-import { Trash2, GripVertical, Grip } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 interface ItemProps extends classNameProps, TodoItemProps {
   completed: boolean;
@@ -15,9 +15,6 @@ const ToDoItem = ({
 }: ItemProps) => {
   return (
     <div className={className}>
-      <div className="h-full -translate-x-2 scale-125  text-clr-todo-placeholder">
-        <GripVertical />
-      </div>
       <Checkbox
         className={`size-6 shrink-0 cursor-pointer rounded-full border-clr-completed text-white ${completed ? "bg-gradient-to-br from-clr-linear-start to-clr-linear-end" : ""}`}
         checked={completed}

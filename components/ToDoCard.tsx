@@ -116,7 +116,7 @@ const ToDoCard = () => {
           <ThemeSwitch />
         </div>
         <ToDoForm
-          className="mb-4 flex scale-100 items-center gap-3 rounded-xl bg-clr-card-bg px-5 py-3 shadow-md md:py-4"
+          className="mb-4 flex scale-100 items-center gap-2 rounded-xl bg-clr-card-bg py-3 pl-3 pr-5 shadow-md md:py-4"
           onSubmit={addToDo}
           onChange={handleInputChange}
           value={newToDo}
@@ -164,7 +164,7 @@ const ToDoCard = () => {
                 activeTodos?.map((todo) => (
                   <Reorder.Item key={todo.id} value={todo}>
                     <ToDoItem
-                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  py-4 pl-3 pr-5 "
+                      className="flex snap-start items-center justify-between gap-2 border-b border-clr-todo-borders  py-4 pl-3 pr-5 "
                       key={todo.id}
                       todo={todo}
                       completed={todo.completed}
@@ -189,7 +189,7 @@ const ToDoCard = () => {
                 completedTodos?.map((todo) => (
                   <Reorder.Item key={todo.id} value={todo}>
                     <ToDoItem
-                      className="flex snap-start items-center justify-between gap-3 border-b border-clr-todo-borders  py-4 pl-3 pr-5 "
+                      className="flex snap-start items-center justify-between gap-2 border-b border-clr-todo-borders  py-4 pl-3 pr-5 "
                       key={todo.id}
                       todo={todo}
                       completed={todo.completed}
