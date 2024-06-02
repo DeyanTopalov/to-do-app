@@ -16,10 +16,6 @@ export const DeleteIcon = ({ className }: classNameProps) => {
   );
 };
 
-{
-  /* <div className="b-1 size-7 rounded-full border-slate-300 bg-slate-700"></div>; */
-}
-
 export const IconSun = ({ className }: classNameProps) => {
   return (
     <svg

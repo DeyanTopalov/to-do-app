@@ -33,4 +33,3 @@ export default function RootLayout({
 }
 
 // inside html: suppressHydrationWarning - to avoid Hydration error due to extra class of light or dark
-// px-6

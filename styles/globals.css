@@ -46,15 +46,6 @@
 }
 
 
-.touch-control {
-  touch-action: none;
-}
-
-.test {
-  color: hsl(237, 14%, 26%);
-  color: hsl(212.7 26.8% 83.9%);
-}
-
 .test-primary {
   /* - Bright Blue:  */
   color: hsl(220, 98%, 61%);

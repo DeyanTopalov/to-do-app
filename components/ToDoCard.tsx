@@ -277,6 +277,4 @@ const ToDoCard = () => {
 export default ToDoCard;
 
 // Next steps:
-// Delete test components
-// Decide on the grip for drag
 // Refactor
